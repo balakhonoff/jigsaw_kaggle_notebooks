@@ -1,0 +1,26 @@
+sudo: false
+
+language: python
+
+dist: xenial
+
+addons:
+  apt:
+    packages:
+      - expect-dev
+
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+
+cache: pip
+
+install:
+  - pip install six     # Using six dependency for text_type()
+  - pip install joblib  # For parallelization.
+  - pip install click   # For CLI.
+  - pip install tqdm    # For progressbar.
+
+script:
+  - unbuffer python -m unittest discover sacremoses/test/ -v
